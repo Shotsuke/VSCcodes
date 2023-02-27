@@ -1,0 +1,175 @@
+
+\documentclass[UTF8]{ctexart}
+
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+
+\begin{document}
+%标题
+\section*{
+  \begin{center}
+    \huge
+    信息与计算科学导论\\
+    221502023 \  沈硕 \  第五次作业\\
+  \end{center}
+ }
+%第一题
+\subsection*{
+  \begin{flushleft}
+    Problem 1：
+    Suppose that p(L) is a polynomial in L,
+    and that p(L) annihilates function T(n).
+    Prove that
+    $T(n) = \sum_{i=1}^k f_\mathrm{i}(n)r_\mathrm{i}^n$,
+    where k is a constant,
+    $f_\mathrm{1}(n), . . . , f_\mathrm{k}(n)$ are polynomials in n,
+    and $r_\mathrm{1}, . . . , r_\mathrm{k}$ are all constants.
+    \\
+  \end{flushleft}
+}
+%第一题解答
+\begin{flushleft}
+  Solution: 不妨设：
+
+  \begin{center}
+    $p(L) = a_0 + a_1L + a_2L^2 + \ldots + a_mL^m$
+  \end{center}
+
+  将$L$带入$T(n)$可以得到：
+
+  \begin{center}
+    $0=p(L)T(n)= a_0T(n) + a_1LT(n) + a_2L^2T(n) + \ldots +a_mL^mT(n)$
+  \end{center}
+
+  那么，p(L)=0的m个解即为T(n)的m个特征根。
+  我们记p(L)=0的k个不重复的解为$r_\mathrm{1}, . . . , r_\mathrm{k}$时，
+  就得到了
+
+  \begin{center}
+    $T(n) = \sum_{i=1}^k f_\mathrm{i}(n)r_\mathrm{i}^n$
+  \end{center}
+
+  其中第i个解$r_i$前的$f_i(n)$的最高次数表示了其重根数$-1$。
+
+\end{flushleft}
+%第二题
+\subsection*{
+  \begin{flushleft}
+    Problem 2:
+    (Based on an  Idea from IMO-1986-2)
+    In a plane there is a regular triangle ABC with side length 1.
+    Two frogs, Alice and Bob, are jumping.
+    Let $A_t, B_t$ be the locations of Alice and Bob, respectively, at time t. \\
+    • $A_0 = B_0 = C.$ \\
+    • $A_1 = A.$ \\
+    • For t ≥ 2, rotate the line segment $BA_\mathrm{t-1}\ 45$\textdegree
+    clockwise about point B to get get $A_t^{'}$;
+    rotate the line segment $BA_\mathrm{t-2} 45$\textdegree
+    clockwise about point B to get get $A_\mathrm{t}^{''}$;
+    the midpoint of $A_t^{'}A_t^{''}$ is $A_t$. \\
+    • For t ≥ 1, rotate the line $CB_\mathrm{t-1}\ 45$\textdegree
+    clockwise about point C to get the new line $CB_t$.
+    The length of line segment $CB_t$ is twice that of line segment $CB_\mathrm{t-1}$.
+    Find the distance of $B_t$ from $A_t$.\\
+  \end{flushleft}
+}
+%第二题解答
+\begin{flushleft}
+  Solution: I give up.\\
+\end{flushleft}
+%第三题
+\subsection*{
+  \begin{flushleft}
+    Problem 3:
+    Define a difference operator
+    $\Delta: \Delta = L - 1$
+    , i.e.,
+    $\Delta T(n) = T(n + 1) - T(n).$
+    Define a sum operator
+    $\sum: \sum T = S + c$
+    where
+    $\Delta S = T$
+    and c is a constant.
+    Prove that for all functions f, g defined on positive integers,
+    $\sum f\Delta g = fg - \sum Lg\Delta f.$\\
+  \end{flushleft}
+}
+%第三题解答
+\begin{flushleft}
+  Solution:
+  \begin{center}
+    $\Delta (f(n)g(n)) = f(n+1)g(n+1) - f(n)g(n) =
+      f(n+1)g(n+1) + f(n)g(n+1) - f(n)g(n+1) - f(n)g(n)$\\
+    $\Delta f(n)g(n) = g(n+1)\Delta f(n) + f(n)\Delta g(n)$\\
+    $\Delta f(n)g(n) = Lg(n)\Delta f(n) + f(n)\Delta g(n)$\\
+  \end{center}
+  对两边同时作$\sum $即得之。
+\end{flushleft}
+%第四题
+\subsection*{
+  \begin{flushleft}
+    Problem 4:
+    The first case of Theorem 6 uses the following condition:
+    $f(n) = \Theta (n^c) $
+    where
+    $c < log_ba$.
+    In the literature, you may find an alternative condition for this case:
+    $f(n) = O(n^{log_ba-\epsilon})$
+    for some
+    $\epsilon > 0$.
+    Prove using these two conditions in the theorem are equivalent.
+  \end{flushleft}
+}
+%第四题解答
+\begin{flushleft}
+  Solution:
+  \begin{center}
+    \begin{large}
+      $T(n) = \sum_{i=0}^{log_bn} a^i f(\frac{n}{b^i}) + O(n^{log_ba})$\\
+      $\leq\ \sum_{i=0}^{log_bn} a^i M (\frac{n}{b^i})^{log_ba - \epsilon} + O(n^{log_ba}) $\\
+      $=\ M n^{lob_ba - \epsilon} \sum_{i=0}^{log_bn} a^i b^{-ilog_ba + i\epsilon} + O(n^{log_ba})$\\
+      $=\ M n^{log_ba - \epsilon} \sum_{i=0}^{log_bn} b^{i\epsilon} + O(n^{log_ba})$\\
+      $=\ M n^{log_ba - \epsilon} \frac{b^\epsilon (log_bn + 1) -1}{b^\epsilon - 1} + O(n^{log_ba})$\\
+      $=\ M n^{log_ba - \epsilon} \frac{(nb)^\epsilon - 1}{b^\epsilon - 1} + O(n^{log_ba})$\\
+      $\leq\ M n^{log_ba - \epsilon} \frac{(nb)^\epsilon}{b^\epsilon - 1} + O(n^{log_ba})$\\
+      $=\ M n^{log_ba} \frac{b^\epsilon}{b^\epsilon - 1} + O(n^{log_ba})$\\
+      $=\ O(n^{log_ba})$\\
+    \end{large}
+  \end{center}
+  则得证。此处的
+  $f(n) = O(n^{log_ba-\epsilon})$
+  等价于
+  $f(n) = \Theta (n^c)$。
+  一方面，两者均小于
+  $log_ba$，这保证了其增长速度不超过$\Theta n^{log_ba}$,从而得到相同的结论；
+  另一方面，可以通过调整$\epsilon$的值来使得二者相同，
+  即使是选择了较小的$\epsilon$而使得f(n)的增长速度比实际的要更快，
+  这也只是说明其增速慢于$\Theta (n^{log_ba})$，对其粗略的估计也无妨于结论。\\
+\end{flushleft}
+%第五题
+\subsection*{
+  \begin{flushleft}
+    Problem 5:
+    Find a recurrence
+    $T(n) = aT(\frac{n}{b}) + f(n)$
+    such that
+    $f(n) = \Theta (n^c)$ where $c > log_ba$,
+    but f(n) does not meet the regularity condition.
+  \end{flushleft}
+}
+%第五题解答
+\begin{flushleft}
+  Solution :
+  我们只需要破坏正则条件即可。例如：
+  \begin{center}
+    \begin{large}
+      $f(n) = n^c\sin n$\\
+    \end{large}
+    其的确是$O(n^c)$，但是没法保证
+    \begin{center}
+      $af(\frac{n}{b}) \leq df(n)$ for some
+      $d < 1$ and sufficiently large n\\
+    \end{center}
+  \end{center}
+
+\end{flushleft}
+\end{document}
