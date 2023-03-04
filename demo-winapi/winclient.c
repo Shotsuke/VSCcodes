@@ -47,7 +47,9 @@ signed main()
     }
 
     // 3.尝试与服务端连接
-    if (connect(server_socket, ptr->ai_addr, (int)ptr->ai_addrlen) == SOCKET_ERROR)
+    if (connect(server_socket, ptr->ai_addr, (int)ptr->ai_addrlen) ==
+        SOCKET_ERROR)
+    // 该函数会阻塞等待连接建立成功或失败
     {
         printf("connect() failed\n");
         system("pause");

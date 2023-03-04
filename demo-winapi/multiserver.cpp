@@ -1,10 +1,10 @@
-#include <stdio.h>
+#include <iostream>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
 #include <winsock2.h>
 #include <windows.h>
 #include <ws2tcpip.h>
+using namespace std;
 void maintainContact(SOCKET *client_socket);
 void buildconnection(SOCKET *listen_socket);
 signed main()
@@ -20,13 +20,13 @@ signed main()
         exit(1);
     }
     // 2.搜寻地址结果
-    struct addrinfo *result, *ptr, hints;
-    memset(&hints, 0, sizeof(struct addrinfo));
+    addrinfo *result, *ptr, hints;
+    memset(&hints, 0, sizeof(addrinfo));
     hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
     hints.ai_protocol = IPPROTO_TCP;
     hints.ai_flags = AI_PASSIVE;
-    iResult = getaddrinfo(NULL, "8080", &hints, result);
+    iResult = getaddrinfo("127.0.0.1", "8080", &hints, &result);
     if (iResult != 0)
     {
         printf("Getaddrinfo failed : %d\n", iResult);
@@ -58,7 +58,7 @@ signed main()
         printf("Listen failed : %d\n", WSAGetLastError());
         closesocket(listen_socket);
         WSACleanup();
-        exit(1);
+        return 1;
     }
     // 6.不断读入新线程
     buildconnection(&listen_socket);
@@ -68,10 +68,10 @@ void buildconnection(SOCKET *listen_socket)
 {
     while (true)
     { // 持续读入新的客户端
-        SOCKET *client_socket = malloc(sizeof(SOCKET));
+        SOCKET *client_socket = (SOCKET *)malloc(sizeof(SOCKET));
         *client_socket = INVALID_SOCKET;
         *client_socket = accept(*listen_socket, NULL, NULL);
-        if (client_socket == INVALID_SOCKET)
+        if (*client_socket == INVALID_SOCKET)
         {
             printf("Accept failed : %d\n", WSAGetLastError());
             closesocket(*listen_socket);
@@ -81,7 +81,9 @@ void buildconnection(SOCKET *listen_socket)
 
         printf("Connection established.\n");
         // 为新的客户端创建新的线程
-        CreateThread(NULL, (SIZE_T)NULL, (LPTHREAD_START_ROUTINE)maintainContact, client_socket, (DWORD)0UL, NULL);
+        CreateThread(NULL, (SIZE_T)NULL,
+                     (LPTHREAD_START_ROUTINE)maintainContact, client_socket,
+                     (DWORD)0UL, NULL);
     }
 }
 void maintainContact(SOCKET *client_socket)
@@ -104,28 +106,27 @@ void maintainContact(SOCKET *client_socket)
                     break;
             }
 
-            int iSendResult = send(client_socket, buf, strlen(buf), 0);
+            int iSendResult = send(*client_socket, buf, iResult, 0);
             if (iSendResult == SOCKET_ERROR)
             {
                 printf("Send failed : %d\n", WSAGetLastError());
-                closesocket(client_socket);
+                closesocket(*client_socket);
                 WSACleanup();
                 exit(1);
             }
         }
         else if (iResult == 0)
         {
-            printf("Send failed : %d\n", WSAGetLastError());
-            closesocket(client_socket);
-            WSACleanup();
-            exit(1);
+            printf("Connection closing ...\n");
+            system("pause");
         }
         else
         {
             printf("Recv failed : %d\n", WSAGetLastError());
-            closesocket(client_socket);
+            closesocket(*client_socket);
             WSACleanup();
             exit(1);
         }
     }
+    return;
 }
