@@ -25,7 +25,8 @@ def num_eights(n):
     True
     """
     "*** YOUR CODE HERE ***"
-    if n < 10 : return int(n == 8)
+    if n < 10:
+        return int(n == 8)
     return num_eights(n//10) + int(n % 10 == 8)
 
 
@@ -63,22 +64,15 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
-    def have_eight(n):
-        if n % 8 == 0 : return True
-        while n >= 1 :
-            if n % 10 == 8 : return True
-            n //= 10
-        return False
-    
-    res , flag , seq_num = 1 , 1 , 1
-    while seq_num < n:
-        if have_eight(seq_num) : flag *= -1
-        res += flag
-        seq_num += 1
-    return res
-    
-    
-    
+    def helper(result, i, step):
+        if i == n:
+            return result
+        elif i % 8 == 0 or num_eights(i) > 0:
+            return helper(result - step, i + 1, -step)
+        else:
+            return helper(result + step, i + 1, -step)
+
+    return helper(1, 1, 1)
 
 
 def next_larger_coin(coin):
