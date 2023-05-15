@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.12.16)  10 MAY 2023 14:17
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.12.16)  15 MAY 2023 10:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**hw5
-(./hw5.tex
+**hw3
+(./hw3.tex
 LaTeX2e <2021-11-15> patch level 1
 L3 programming layer <2022-02-24> (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/ctex/ctexart.cls (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/ctex/config/ctexbackend.cfg
 File: ctexbackend.cfg 2021/12/12 v2.5.8 Backend configuration file (CTEX)
@@ -203,11 +203,23 @@ Package fontspec Info: Font family 'SimSun(0)' created for font 'SimSun' with
 
 )) (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/ctex/config/ctex.cfg
 File: ctex.cfg 2021/12/12 v2.5.8 Configuration file (CTEX)
-) (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/geometry/geometry.sty
+) (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+) (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks16
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks17
 ) (d:/coding/TexLive/texlive/2022/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
  (d:/coding/TexLive/texlive/2022/texmf-dist/tex/generic/iftex/iftex.sty
@@ -224,9 +236,9 @@ Package: iftex 2022/02/03 v1.0f TeX engine tests
 \Gm@layoutheight=\dimen179
 \Gm@layouthoffset=\dimen180
 \Gm@layoutvoffset=\dimen181
-\Gm@dimlist=\toks17
-) (./hw5.aux)
-\openout1 = `hw5.aux'.
+\Gm@dimlist=\toks18
+) (./hw3.aux)
+\openout1 = `hw3.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
 LaTeX Font Info:    ... okay on input line 6.
@@ -248,7 +260,7 @@ LaTeX Font Info:    ... okay on input line 6.
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
-\symlegacymaths=\mathgroup4
+\symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
 (Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 6.
 LaTeX Font Info:    Redeclaring math accent \acute on input line 6.
@@ -336,30 +348,23 @@ LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12.045> on input line 28.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 28.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 28.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.53937> on input line 34.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 34.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 34.
-Missing character: There is no ≥ (U+2265) in font [lmroman12-bold]:mapping=tex-text;!
-Missing character: There is no ≥ (U+2265) in font [lmroman12-bold]:mapping=tex-text;!
-[1
+LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
+(d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
+ (d:/coding/TexLive/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) [1
 
-] [2] [3] (./hw5.aux) ) 
+] [2] [3] [4] [5] [6] (./hw3.aux) ) 
 Here is how much of TeX's memory you used:
- 7252 strings out of 476179
- 211222 string characters out of 5806456
- 554729 words of memory out of 5000000
- 27937 multiletter control sequences out of 15000+600000
- 474761 words of font info for 68 fonts, out of 8000000 for 9000
+ 7758 strings out of 476179
+ 214683 string characters out of 5806456
+ 551729 words of memory out of 5000000
+ 28433 multiletter control sequences out of 15000+600000
+ 475704 words of font info for 69 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 89i,6n,97p,338b,338s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 89i,6n,97p,359b,339s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on hw5.pdf (3 pages).
+Output written on hw3.pdf (6 pages).
