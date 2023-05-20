@@ -1,0 +1,114 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage[a4paper, total={6.5in, 9.5in}]{geometry}
+
+\begin{document}
+%标题
+\section*{
+  \begin{center}
+      \huge
+      信息与计算科学导论\\
+      Graph Theory\\
+      221502023 \  沈硕 \  第四次作业\\
+  \end{center}
+ }
+
+%Problem 5.4
+\subsection*{
+    \begin{flushleft}
+        \Large
+        Problem 5.4:
+        Order the vertices of a graph G according to their degrees,
+        so that $V(G) = \{x_1,x_2,\cdots,x_n\}$
+        and $d(x_1) \geq d(x_2) \geq \cdots$.
+        Show that in this order the greedy algorithm uses
+        at most $\max_i \min\{ d(x_i) + 1 ,i\}$ colours,
+        and so if k is the maximal natural number
+        for which $ k \leq d(x_k) + 1$ then $\chi (G) \leq k$.
+    \end{flushleft}
+}%Solution to Problem 5.4
+\begin{flushleft}
+    \Large
+    Solution:
+    Color G by following this non-increasing degree sequence.
+    Each time when we color the $i^{th}$ vertex $v_i$,
+    it has at most $\min \{d_i , i-1\}$ colored neighbours.
+    So at this very moment we use at most $1+\min \{d_i , i-1\}$, or ,
+    $\min\{ d(x_i) + 1 ,i\}$ colors.
+    Since this holds for all vertices, maximizing i can get the upper bound.\\
+    If k is the maximal natural number for which $ k \leq d(x_k) + 1$,
+    then coloring $v_1 , v_2 ,\cdots , v_k$ uses at most k colors.
+    $\forall l > k\ ,\ l > d(x_l) + 1$,
+    then for $v_{k+1} , v_{k+2} , \cdots , v_n$,
+    when we come to color each of them, we will use at most $d(x_l) + 1$ colors.
+    As the degree sequence is non-increasing, $d(x_l) + 1 \leq k$ holds.
+    So $\chi (G) \leq k$.
+\end{flushleft}
+
+%Problem 5.5
+\subsection*{
+    \begin{flushleft}
+        \Large
+        Problem 5.5:
+        Deduce from Exercise 4 that if G has n vertices then
+        \begin{center}
+            \Large
+            $\chi(G) + \chi(\overline{G}) \leq n + 1$
+        \end{center}
+    \end{flushleft}
+}%Solution to Problem 5.5
+\begin{flushleft}
+    \Large
+    Solution:
+    We have non-increasing degree sequence for G:
+    $V(G) = \{x_1,x_2,\cdots,x_n\}$
+    and $d(x_1) \geq d(x_2) \geq \cdots \geq d(x_n)$.\\
+    Correpondingly,
+    there is a non-increasing sequence for $\overline{G}$:
+    $d(x_n) \geq d(x_{n-1}) \geq \cdots \geq d(x_1)$.\\
+    Let k be the maximal natural number
+    for which $ k \leq d(x_k) + 1$ then $\chi (G) \leq k$.
+    Then for $\overline{G}$ this must be $n+1-k$.
+    Summing up these two can solve the problem.
+\end{flushleft}
+
+%Problem 5.6
+\subsection*{
+    \begin{flushleft}
+        \Large
+        Problem 5.6:
+        Show that $\chi(G) + \chi(\overline{G}) \geq 2 \sqrt{n}$.
+    \end{flushleft}
+}%Solution to Problem 5.6
+\begin{flushleft}
+    \Large
+    Solution:
+    Since k is at least 1 and at most n,
+    we have $\chi(G) \chi(\overline{G}) \geq n$.
+    So $(\chi(G) + \chi(\overline{G}))^2 \geq 4\chi(G) \chi(\overline{G})$.
+    Then we are done.
+\end{flushleft}
+
+%Problem 5.29
+\subsection*{
+    \begin{flushleft}
+        \Large
+        Problem 5.29:
+        Find the edge chromatic number of $K_n$.
+    \end{flushleft}
+}%Solution to Problem 5.29
+\begin{flushleft}
+    \Large
+    Solution:
+    If n is odd, then $\chi^{'}(G) = n\ (\ = \Delta + 1 )$;
+    if n is even, then $\chi^{'}(G) = n-1\ (\ = \Delta )$.\\
+    Case even:
+    G must contain n-1 different perfect matchings.
+    Then for each perfect matching, we apply a different color.
+    So their will be $\chi^{'}(G) = n-1\ (\ = \Delta )$.\\
+    Case odd: n can be shown as 2k+1, so $\mid E \mid = (2k+1)k$.
+    Since each color can color k edges, we need at least
+    $\lceil\frac{\mid E \mid}{k}\rceil = 2k+1 = n$.
+\end{flushleft}
+\end{document}
