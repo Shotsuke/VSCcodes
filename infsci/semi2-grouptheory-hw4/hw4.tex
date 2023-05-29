@@ -30,7 +30,7 @@
 }%Solution to Problem 38
 \begin{flushleft}
     \Large
-
+    Solution: I give up.
 \end{flushleft}
 
 %Problem 39
@@ -91,7 +91,7 @@
 }%Solution to Problem 40
 \begin{flushleft}
     \Large
-    Solution: I have read it..??
+    Solution: I have read it... That sounds very strange and difficult www.
 \end{flushleft}
 
 %Problem 41
@@ -103,7 +103,54 @@
         Suppose a is a positive integer but not a perfect square
         (i.e., not equal to the square of any integer).
         Prove that there exist infinitely many primes p such that
-        $(\frac{a}{p} = -1)$
+        $(\frac{a}{p}) = -1$
     \end{flushleft}
-}
+}%Solution to Problem 41
+\begin{flushleft}
+    \Large
+    Solution:
+    Since a is not a perfect square,
+    a can be denoted by $q^k m$,
+    where k is an odd integer to satisfy a is not a perfect square,
+    and m is a positive integer and coprime to q.\\
+
+    Then $(\frac{a}{p}) = (\frac{q}{p})^k (\frac{m}{p})$
+    $=(\frac{q}{p})^k\ \Pi _{i=1}^{n} (\frac{b_i}{p}) ^ {c_i}$,
+    where we let $m = \Pi _{i=1}^{n} b_i ^ {c_i}$ and
+    $b_i , i=1,2,\cdots,n$ are all primes.\\
+
+    Observed that if
+    $(\frac{q}{p}) = -1\ and\ (\frac{b_i}{p}) = 1\ ,\forall i$,
+    then $(\frac{a}{p}) = -1$ can be satisfied.\\
+
+    By quadratic reciprocity,
+    $(\frac{q}{p})(\frac{p}{q}) = (-1)^{\frac{(p-1)(q-1)}{4}}$,
+    and if $p \equiv 1\ (mod\ 4)$, then this quadratic reciprocity leads to
+    $(\frac{q}{p})(\frac{p}{q}) = 1$.
+    In this situation,$(\frac{q}{p})$ and $(\frac{p}{q})$ are all 1 or -1.
+    Then it switches to find p to satisfy $(\frac{p}{q}) = -1$.
+    We can arbitrarily choose an x s.t. x is a $QNR_q$,
+    then choose p s.t. $p \equiv x\ (mod\ q)$ can make $(\frac{p}{q}) = -1$.\\
+
+    Then consider $(\frac{b_i}{p})(\frac{p}{b_i}) = (-1)^\frac{(p-1)(b_i-1)}{4}$.
+    Since $p \equiv 1\ (mod\ 4)$, there must be $(\frac{b_i}{p})(\frac{p}{b_i}) = 1$.
+    To make $(\frac{b_i}{p}) = 1$, letting $p \equiv 1\ (mod\ b_i)$ can satisfy.\\
+
+    So, summing up all conditions below:
+    $p \equiv 1\ (mod\ 4)$,
+    $p \equiv x\ (mod\ q)$,
+    $p \equiv 1\ (mod\ b_i)$.
+    Denote $b_{n+1} = 4,\ b_{n+2} = q$,
+    $Q = Pi _{i=1}^{n+2} b_i$\\
+    Using CRT can get
+    $p = \sum_{i=1}^{n+1} \frac{Q}{b_i}[\frac{Q}{b_i}]^{-1}
+        + x\frac{Q}{q}[\frac{Q}{q}]^{-1} + kQ$.
+    And if q or $b_i$ is 2 then delete the correpondent equiv is also well.\\
+    $\sum_{i=1}^{n+1} \frac{Q}{b_i}[\frac{Q}{b_i}]^{-1}
+        + x\frac{Q}{q}[\frac{Q}{q}]^{-1}$
+    is coprime to Q, because for $b_i$,
+    $\forall j\neq i,\ b_i \mid Q ,\ b_i \mid \frac{Q}{b_j}[\frac{Q}{b_j}]^{-1}$ ,
+    but $b_i \nmid \frac{Q}{b_i}[\frac{Q}{b_i}]^{-1}$.
+    So by Dirichlet Lemma there are infinite p.
+\end{flushleft}
 \end{document}
