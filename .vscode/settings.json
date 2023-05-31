@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "iostream": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "ostream": "cpp"
     },
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.showContextMenu": true,
