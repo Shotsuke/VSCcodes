@@ -49,10 +49,13 @@ public:
     void showMySelf()
     {
         cout << type << "\t";
+
         if (type == Identifier)
             cout << name;
+
         if (type == Integer)
             cout << val;
+
         cout << endl;
         return;
     }
@@ -70,12 +73,13 @@ public:
         EqualExp,
         StopExp
     };
-    ExpType                 type;
-    string                  name = " ";
-    int                     val = 0;
+    ExpType     type;
+    string      name = " ";
+    int         val = 0;
     Token* op = nullptr;
     Expression* left = nullptr;
     Expression* right = nullptr;
+
     static map<string, int> varieties;
 
     Expression(ExpType type)
@@ -235,16 +239,20 @@ public:
         }
         return;
     }
+
     // Skip: ' ', '\t', '\r', '\n'
     // If the input is valid, return true.
     // If it meets the end, return false.
     bool skipblank()
     {
         char c;
-        while ((c = getchar()) == ' ' || c == '\t' ||
-            c == '\n' || c == '\r')
+        while ((c = getchar()) == ' ' ||
+            c == '\t' ||
+            c == '\n' ||
+            c == '\r')
         {
         }
+
         if (c == 26 || c == EOF)
             return false;
         else
@@ -259,7 +267,9 @@ public:
     {
         if (!skipblank())
         { // Deal with blanks.
-            myTokens.push_back(new Token(Token::TokenType::EndOfInput));
+            myTokens.push_back(new Token(
+                Token::TokenType::EndOfInput
+            ));
             return false;
         }
         char c = getchar();
@@ -270,10 +280,14 @@ public:
             {
                 _num = _num * 10 + c - '0';
             }
-            myTokens.push_back(new Token(Token::TokenType::Integer, _num));
+            myTokens.push_back(new Token(
+                Token::TokenType::Integer, _num
+            ));
             if (c == 26 || c == EOF)
             {
-                myTokens.push_back(new Token(Token::TokenType::EndOfInput));
+                myTokens.push_back(new Token(
+                    Token::TokenType::EndOfInput
+                ));
                 return false;
             }
             else
@@ -283,17 +297,23 @@ public:
         { // Deal with Identifier
             string temp;
             temp += c;
-            while (isalnum((c = getchar())) || c == '_')
+            while (isalnum(c = getchar()) || c == '_')
             {
                 temp += c;
             }
             if (temp == "output")
-                myTokens.push_back(new Token(Token::TokenType::Output));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Output
+                ));
             else
-                myTokens.push_back(new Token(Token::TokenType::Identifier, temp));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Identifier, temp
+                ));
             if (c == 26 || c == EOF)
             {
-                myTokens.push_back(new Token(Token::TokenType::EndOfInput));
+                myTokens.push_back(new Token(
+                    Token::TokenType::EndOfInput
+                ));
                 return false;
             }
             else
@@ -303,41 +323,63 @@ public:
             switch (c)
             {
             case '+':
-                myTokens.push_back(new Token(Token::TokenType::Plus));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Plus
+                ));
                 break;
             case '-':
-                myTokens.push_back(new Token(Token::TokenType::Minus));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Minus
+                ));
                 break;
             case '*':
-                myTokens.push_back(new Token(Token::TokenType::Multiple));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Multiple
+                ));
                 break;
             case '/':
-                myTokens.push_back(new Token(Token::TokenType::Divide));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Divide
+                ));
                 break;
             case '>':
-                myTokens.push_back(new Token(Token::TokenType::Bigger));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Bigger
+                ));
                 break;
             case '<':
-                myTokens.push_back(new Token(Token::TokenType::Smaller));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Smaller
+                ));
                 break;
             case '(':
-                myTokens.push_back(new Token(Token::TokenType::Lparen));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Lparen
+                ));
                 break;
             case ')':
-                myTokens.push_back(new Token(Token::TokenType::Rparen));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Rparen
+                ));
                 break;
             case ';':
-                myTokens.push_back(new Token(Token::TokenType::Semicolon));
+                myTokens.push_back(new Token(
+                    Token::TokenType::Semicolon
+                ));
                 break;
             case '=':
                 if ((c = getchar()) == '=')
                 {
-                    myTokens.push_back(new Token(Token::TokenType::DoubleEqual));
+                    myTokens.push_back(new Token(
+                        Token::TokenType::DoubleEqual
+                    ));
                     break;
                 }
                 else
                 {
-                    myTokens.push_back(new Token(Token::TokenType::Equal));
+                    myTokens.push_back(new Token(
+                        Token::TokenType::Equal
+                    ));
                     ungetc(c, stdin);
                     break;
                 }
@@ -363,6 +405,7 @@ public:
                     Expression::ExpType::IntegerExp,
                     myTokens[starting]->val
                 );
+
                 return res;
                 break;
             };
@@ -374,6 +417,7 @@ public:
                     Expression::ExpType::IdentifierExp,
                     myTokens[starting]->name
                 );
+
                 return res;
                 break;
             };
@@ -385,10 +429,28 @@ public:
             }
         }
 
-        //Deal with the output
+        if (myTokens[starting]->type == Token::TokenType::Lparen &&
+            myTokens[ending - 1]->type == Token::TokenType::Rparen)
+        {
+            return treeBuild(starting + 1, ending - 1);
+        }
+
+        int lparen = 0;
+
+        //Deal with the output, also sum up the number of lparen
+        //Prior 1
         for (int i = starting; i < ending; ++i)
         {
-            if (myTokens[i]->type == Token::TokenType::Output)
+            if (myTokens[i]->type == Token::TokenType::Lparen)
+            {
+                lparen++;
+            }
+            else if (myTokens[i]->type == Token::TokenType::Rparen)
+            {
+                lparen--;
+            }
+
+            if (lparen == 0 && myTokens[i]->type == Token::TokenType::Output)
             {
                 Expression* right =
                     treeBuild(i + 1, ending);
@@ -399,14 +461,26 @@ public:
                     myTokens[i],
                     right
                 );
+
                 return res;
             }
         }
 
         //Deal with the =
+        //Prior 2
+        lparen = 0;
         for (int i = starting; i < ending; ++i)
         {
-            if (myTokens[i]->type == Token::TokenType::Equal)
+            if (myTokens[i]->type == Token::TokenType::Lparen)
+            {
+                lparen++;
+            }
+            else if (myTokens[i]->type == Token::TokenType::Rparen)
+            {
+                lparen--;
+            }
+
+            if (lparen == 0 && myTokens[i]->type == Token::TokenType::Equal)
             {
                 Expression* left = treeBuild(starting, i);
                 Expression* right = treeBuild(i + 1, ending);
@@ -417,15 +491,28 @@ public:
                     left,
                     right
                 );
+
                 return res;
             }
         }
 
         //Deal with the +, -
+        //Prior 3
+        lparen = 0;
         for (int i = starting; i < ending; ++i)
         {
-            if (myTokens[i]->type == Token::TokenType::Plus ||
-                myTokens[i]->type == Token::TokenType::Minus)
+            if (myTokens[i]->type == Token::TokenType::Lparen)
+            {
+                lparen++;
+            }
+            else if (myTokens[i]->type == Token::TokenType::Rparen)
+            {
+                lparen--;
+            }
+
+            if (lparen == 0 && (
+                myTokens[i]->type == Token::TokenType::Plus ||
+                myTokens[i]->type == Token::TokenType::Minus))
             {
                 Expression* left = treeBuild(starting, i);
                 Expression* right = treeBuild(i + 1, ending);
@@ -436,15 +523,28 @@ public:
                     left,
                     right
                 );
+
                 return res;
             }
         }
 
         //Deal with the *, /
+        //Prior 4
+        lparen = 0;
         for (int i = starting; i < ending; ++i)
         {
-            if (myTokens[i]->type == Token::TokenType::Multiple ||
-                myTokens[i]->type == Token::TokenType::Divide)
+            if (myTokens[i]->type == Token::TokenType::Lparen)
+            {
+                lparen++;
+            }
+            else if (myTokens[i]->type == Token::TokenType::Rparen)
+            {
+                lparen--;
+            }
+
+            if (lparen == 0 && (
+                myTokens[i]->type == Token::TokenType::Multiple ||
+                myTokens[i]->type == Token::TokenType::Divide))
             {
                 Expression* left = treeBuild(starting, i);
                 Expression* right = treeBuild(i + 1, ending);
@@ -455,6 +555,7 @@ public:
                     left,
                     right
                 );
+
                 return res;
             }
         }
@@ -476,7 +577,6 @@ signed main()
     while (mylex.getNextToken() &&
         mylex.myTokens[++ending]->type != Token::TokenType::EndOfInput)
     {
-
         if (mylex.myTokens[ending]->type == Token::TokenType::Semicolon)
         {
             Expression* root = mylex.treeBuild(starting, ending);
