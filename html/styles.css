@@ -1,0 +1,139 @@
+/*全局选择器*/
+*{
+    margin:0px;
+}
+
+
+
+body
+{
+    background-color:antiquewhite;
+    color: #333;
+}
+
+p
+{
+    font-size: larger;
+    text-indent: 20px;
+}
+
+
+
+tr, td
+{
+    border: 1px solid aquamarine;
+}
+
+table
+{
+    border: 3px solid pink;
+    background-image: url(suguri.jpg);
+}
+
+
+
+/*类选择器*/
+.myclass
+{
+    color: aqua;
+    background-image: url(suguri.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    text-decoration: dashed;
+    text-decoration: overline;
+    text-decoration: underline;
+}
+
+/*ID选择器*/
+#mytitle
+{
+    border:3px dashed green;
+}
+
+/*
+后代选择器
+选择所有被E元素包含的F元素，中间用空格隔开
+*/
+ul li{
+    color:green;
+}
+
+/*
+子代选择器
+选择所有作为E元素的直接子元素F，对更深一层的元素不起作用，
+用>表示
+*/
+div>a{
+    background-image: url(suguri.jpg);
+}
+
+/*
+相邻兄弟选择器
+选择紧跟E元素后的F元素，用加号表示，选择相邻的第一个兄弟元
+素，只能向下选择
+*/
+h2+h3{
+    background-image: url(suguri.jpg);
+}
+
+/*
+通用兄弟选择器
+选择E元素之后的所有兄弟元素F，作用于多个元素，用~隔开，只能
+向下选择
+*/
+h1~h2{
+    color:red;
+}
+
+/*
+弹性盒
+*/
+.flex-container {
+    display: flex;
+    width: 400px;
+    height: 250px;
+    background-color: lightgrey;
+    border-radius: 5%;
+    box-shadow: 3px -10px 3px violet;
+    animation: myAnimation 3s linear 0s infinite alternate;
+}
+.flex-item {
+    background-color: cornflowerblue;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    
+}
+
+/*动画效果*/
+
+
+div
+{
+    /*animation: myAnimation 3s linear 0s infinite alternate;*/
+    background-color: red;
+}
+
+.flex-container:hover
+{
+    animation-play-state: paused;
+}
+
+@keyframes myAnimation
+{
+    0%
+    {
+        background-color: red;
+    }
+
+    50%
+    {
+        background-color: green;
+    }
+    
+    100%
+    {
+        background-color: yellow;
+    }
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="styles.css">
+    <title>Hello World!</title>
+</head>
+<body>
+    <h1 align="center">Head 1</h1>
+    <h2 align="right">Head 2</h2>
+    <h3 align="left">Head 3</h3>
+    <h4 class="myclass">Head 4 myclass applied</h4>
+    <h5 id="mytitle">Head 5</h5>
+    <h6>Head 6</h6>
+    
+    <p>
+        Problem 33: (USA TST 2008, Problem 4) 
+        [Difficulty Estimate=3.2]
+        <hr color="red" width="400" size="1" align="left">
+    </p>
+    <p>
+        Recall that a perfect square is simply the square
+        of an integer. Prove that, for any integer n, n^7 + 7 is not a
+        perfect square.<br>(Hint from [2]: Use Lemma 2.)
+    </p>
+
+    <p>
+        <a href="Byoko.jpg">Byoko</a>
+    </p>
+    
+    <p>
+        <a href="#section1">Go to section 1.</a>
+    </p>
+
+    <p id="section1">
+        <em>This</em>
+        <b>is</b>
+        <i>the</i>
+        <strong>section</strong>
+        <del>1</del>
+        .
+    </p>
+
+    <ol type="i">
+        <li>Ordered List Item 1</li>
+        <li>Ordered List Item 2</li>
+        <li>Ordered List Item 3</li>
+    </ol>
+
+    <table border="5">
+        <thead>
+            The head of the table.
+        </thead>
+        <body>
+            <tr>
+                <td>
+                    1.1
+                </td>
+                <td>
+                    1.2
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    2.1
+                </td>
+                <td>
+                    2.2
+                </td>
+            </tr>
+        </body>
+    </table>
+
+    <style>
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+        }
+      
+        li {
+          margin-right: 50px; /* 可根据需要调整项之间的间距 */
+        }
+      </style>
+    <ul type="circle">
+        <li>Unordered List Item 1</li>
+        <li>Unordered List Item 2</li>
+        <li>Unordered List Item 3</li>
+    </ul>
+<!-- 注释将以此方式输入 -->
+    <table border="3" width="500px" height="200px">
+        <tr>
+            <td colspan="3">单元格1单元格2单元格3</td>
+            <td>单元格4</td>
+            <td>单元格5</td>
+        </tr>
+        <tr>
+            <td rowspan="2">单元格6-11</td>
+            <td>单元格7</td>
+            <td rowspan="3">单元格81318</td>
+            <td colspan="2" rowspan="2">单元格9101415</td>
+        </tr>
+        <tr>
+            <td>单元格12</td>
+        </tr>
+        <tr>
+            <td>单元格16</td>
+            <td>单元格17</td>
+            <td>单元格19</td>
+            <td>单元格20</td>
+        </tr>
+    </table>
+
+    <form name="MyForm">
+        First name:
+        <input type="text" name="first name">
+        <br>
+        Last name:
+        <input type="text">
+        <br>
+        Password:
+        <input type="password">
+    </form>
+
+    <form action="process.php" method="POST">
+        <label for="first-name">First Name:</label>
+        <input type="text" name="first-name" id="first-name" value="">
+        <input type="submit" value="Submit">
+    </form>
+
+    <div class="flex-container">
+        <div class="flex-item">flex item 1</div>
+        <div class="flex-item">flex item 2</div>
+        <div class="flex-item">flex item 3</div>
+    </div>
+
+    <img    src="Byoko.jpg"
+            alt="Byoko" 
+            title="display this text if mouse is floating"
+            width=""
+            height="">
+
+    
+</body>
+</html>

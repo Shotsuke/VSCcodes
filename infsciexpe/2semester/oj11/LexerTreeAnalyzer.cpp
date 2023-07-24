@@ -74,11 +74,11 @@ public:
         StopExp
     };
     ExpType     type;
-    string      name = " ";
-    int         val = 0;
-    Token* op = nullptr;
-    Expression* left = nullptr;
-    Expression* right = nullptr;
+    string      name    = " ";
+    int         val     = 0;
+    Token*      op      = nullptr;
+    Expression* left    = nullptr;
+    Expression* right   = nullptr;
 
     static map<string, int> varieties;
 
@@ -102,7 +102,7 @@ public:
         :
         type(type), op(op), left(left), right(right) {}
 
-    ~Expression()
+    virtual ~Expression()
     {
         delete op;
         delete left;
@@ -150,7 +150,6 @@ public:
         :
         Expression(type, op, right)
     {}
-
     int calculate()
     {
         switch (op->type)
