@@ -2,7 +2,20 @@
     "files.associations": {
         "iostream": "cpp",
         "map": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "*.tcc": "cpp",
+        "expected": "cpp",
+        "optional": "cpp",
+        "ratio": "cpp",
+        "system_error": "cpp",
+        "array": "cpp",
+        "functional": "cpp",
+        "regex": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "variant": "cpp",
+        "iosfwd": "cpp"
     },
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.showContextMenu": true,
