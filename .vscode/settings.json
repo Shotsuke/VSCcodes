@@ -15,7 +15,9 @@
         "type_traits": "cpp",
         "utility": "cpp",
         "variant": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "new": "cpp",
+        "set": "cpp"
     },
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.showContextMenu": true,
@@ -130,5 +132,9 @@
     ],
     "latex-workshop.latex.autoClean.run": "onFailed",
     "latex-workshop.latex.recipe.default": "lastUsed",
-    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click"
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.formatting.provider": "none"
 }
