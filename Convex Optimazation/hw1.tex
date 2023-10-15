@@ -1,0 +1,167 @@
+\documentclass[a4paper]{article}
+% \usepackage[margin=1.25in]{geometry}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+%\usepackage{ctex}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{mathtools}
+\usepackage{enumerate}
+
+\newcommand{\homework}[5]{
+    \pagestyle{myheadings}
+    \thispagestyle{plain}
+    \newpage
+    \setcounter{page}{1}
+    \noindent
+    \begin{center}
+    \framebox{
+        \vbox{\vspace{2mm}
+        \hbox to 6.28in { {\bf Optimization Methods \hfill #2} }
+        \vspace{6mm}
+        \hbox to 6.28in { {\Large \hfill #1 \hfill} }
+        \vspace{6mm}
+        \hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: {\rm #4}, StudentId: {\rm #5}}}
+        \vspace{2mm}}
+    }
+    \end{center}
+    % \markboth{#4 -- #1}{#4 -- #1}
+    \vspace*{4mm}
+}
+
+
+\newenvironment{solution}
+{\color{blue} \paragraph{Solution.}}
+{\newline \qed}
+
+\begin{document}
+%==========================Put your name and id here==========================
+\homework{Homework 1}{Fall 2023}{Lijun Zhang}{Shuo Shen}{221502023}
+
+\paragraph{Notice}
+\begin{itemize}
+    \item The submission email is: \textbf{optfall2023@163.com}.
+    \item Please use the provided \LaTeX{} file as a template.
+    \item If you are not familiar with \LaTeX{}, you can also use Word to generate a \textbf{PDF} file.
+\end{itemize}
+
+\paragraph{Problem 1: Norms}
+~\\
+
+\noindent
+A function  $f: \mathbb{R}^{n} \rightarrow \mathbb{R} $ with  $\operatorname{dom} f=\mathbb{R}^{n} $ is called a norm if
+\begin{itemize}
+    \item $f$  is nonnegative:  $f(x) \geq 0 $ for all  $x \in \mathbb{R}^{n}$
+    \item $f$  is definite:  $f(x)=0$  only if  $x=0$
+    \item  $f$  is homogeneous:  $f(t x)=|t| f(x)$, for all $x \in \mathbb{R}^{n}$  and  $t \in \mathbb{R}$
+    \item $f$  satisfies the triangle inequality:  $f(x+y) \leq f(x)+f(y)$, for all $ x, y \in \mathbb{R}^{n}$
+\end{itemize}
+We use the notation  $f(x)=\|x\|$. Let  $\|\cdot\|$  be a norm on  $\mathbb{R}^{n}$. The associated dual norm, denoted $\|\cdot\|_{*}$ , is defined as
+$$\|z\|_{*}=\sup \left\{z^{\mathrm{T}} x \mid\|x\| \leq 1\right\}$$
+\begin{enumerate}[a)]
+    \item  Prove that  $\|\cdot\|_{*}$  is a valid norm.
+    \item Prove that the dual of the Euclidean norm  ($\ell_{2}$-norm) is the Euclidean norm, i.e., prove that
+          $$\|z\|_{2 *}=\sup \left\{z^{T} x \mid\|x\|_{2} \leq 1\right\}=\|z\|_{2}$$
+          (\emph{Hint}: Use Cauchy-Schwarz inequality.)
+\end{enumerate}
+\begin{solution}
+    a) Because $z^T x$ is going to gain the maximum value, the direction of $x$ is the same as $z$, and its $l_2$ norm is 1, i.e. $x = \frac{z}{||z||}$ Then $\angle (x , z) = 0$ holds, so the result of $z^T x$ is nonnegative, and is 0 only if $x=0$.
+    $$f(tz) = ||tz||_* = \sup\{t z^T x \ | \ ||x|| \le 1\} = |t|\ \sup\{z^T x \ | \ ||x|| \le 1\} = |t|f(z)$$
+    $$f(x) + f(y) = \sup\{x^T z_1 \ | \ ||z_1|| \le 1\} + \sup\{y^T z_2 \ | \ ||z_2|| \le 1\} >= \sup\{x^T z_1 \ | \ ||z_1|| \le 1\} + y^T z_1$$
+    $$\geq \sup\{(x^T + y^T) z_1 \ | \ ||z_1|| \le 1\} = f(x+y)$$
+
+    b)\ $\|z\|_{2 *}=\sup \left\{z^{T} x \mid\|x\|_{2} \leq 1\right\}$. Cauchy-Schwarz inequality implies that $||z^T x||_2 \leq ||z||_2||x||_2 \leq ||z||_2$. So choosing $x = \frac{z}{||z||_2}$ achieves the upper bound.
+\end{solution}
+
+
+\paragraph{Problem 2: Inequalities}
+~\\
+
+\noindent
+Let $x\in\mathbb{R}^n,y\in\mathbb{R}^n$, where $n$ is a positive integer. Let $\|\cdot\|$ denote the Euclidean norm.
+\begin{enumerate}[a)]
+    \item Prove the triangle inequality $\|x+y\|\leq\|x\|+\|y\|$.
+    \item Prove $\|x+y\|^2\leq(1+\epsilon)\|x\|^2+(1+\frac{1}{\epsilon})\|y\|^2$ for any $\epsilon>0$.
+\end{enumerate}
+(\emph{Hint}: You may need the Young's inequality for products, i.e. if $a$ and $b$ are nonnegative real numbers and $p$ and $q$ are real numbers greater than 1 such that $1/p+1/q=1$, then $ab\leq\frac{a^p}{p}+\frac{b^q}{q}$.)
+\begin{solution}
+    a)\ $||x+y|| = ((x+y)^T(x+y))^{\frac{1}{2}} = (\Sigma_{i=1}^{n}(x_i + y_i)^2)^{\frac{1}{2}}$\\
+    $= (\Sigma_{i=1}^{n}(x_i^2 + y_i^2 + 2x_iy_i))^{\frac{1}{2}} \leq (\Sigma_{i=1}^{n}(x_i^2 + y_i^2) + 2(\Sigma_{i=1}^{n}x_i^2\Sigma_{i=1}^{n}y_i^2)^{\frac{1}{2}})^{\frac{1}{2}}$\\
+    $= (\Sigma_{i=1}^{n}(x_i^2 + y_i^2) + 2(\Sigma_{i=1}^{n}x_i^2)^{\frac{1}{2}}(\Sigma_{i=1}^{n}y_i^2)^{\frac{1}{2}})^{\frac{1}{2}}$\\
+    $= (\Sigma_{i=1}^{n}x_i^2)^{\frac{1}{2}} + (\Sigma_{i=1}^{n}y_i^2)^{\frac{1}{2}} = ||x|| + ||y||$\\
+    b)\ $||x+y||^2 \leq (||x|| + ||y||)^2 = ||x||^2 + ||y||^2 + 2||x||||y|| \leq ||x||^2 + ||y||^2 + \epsilon ||x||^2 + \frac{1}{\epsilon} ||y||^2$
+\end{solution}
+
+\paragraph{Problem 3: Definition of convexity}
+~\\
+
+\noindent
+Which of the following sets are convex?
+Please provide explanations for your choices.
+\begin{enumerate}[a)]
+    \item a set of the form $\left\{x \in \mathbf{R}^{n} \mid \alpha \leq a^{T} x \leq \beta\right\}$.
+    \item a set of the form $\left\{x \in \mathbf{R}^{n} \mid \alpha_i \leq  x_i \leq \beta_i,i=1,2,...,n\right\}$.
+    \item a set of the form $\left\{x \in \mathbf{R}^{n} \mid a_1^{T} x \leq b_1, a_2^{T} x \leq b_2\right\}$.
+    \item  The set of points closer to a given point than a given set, $i.e.$,
+          $$\left\{x \mid\left\|x-x_{0}\right\|_{2} \leq\|x-y\|_{2} \text { for all } y \in S\right\}$$
+          where $S \subseteq \mathbf{R}^{n}$.
+    \item The set of points closer to one set than another, $i.e.$,
+          $$\{x \mid \textbf{dist}(x, S) \leq \textbf{dist}(x, T)\},$$
+          where $S,T\subseteq \mathbf{R}^{n},$ and
+          $$\textbf{dist}(x, S)=\inf \left\{\|x-z\|_{2} \mid z \in S\right\}.$$
+    \item The set of points whose distance to a does not exceed a fixed fraction $\theta$ of the
+          distance to b, $i.e.$, the set $\left\{x \mid\|x-a\|_{2} \leq \theta\|x-b\|_{2}\right\}.$ You can assume $a \neq b $ and
+          $0 \leq \theta \leq 1$.
+
+\end{enumerate}
+\begin{solution}
+    a) \ Yes. This describes two hyperplane and a space in the mid of them. Then obviously it is convex.\\
+    b) \ Yes. Due to a), this describes the intersection of finite spaces, or a rectangle, so it is still convex.\\
+    c) \ Yes. This describes the intersection of two arbitrary spaces, so it is convex.\\
+    d) \ Yes. This can be shown as $\cap _{y \in S} \{x \ | \ ||x-x_0||_2 \leq ||x-y||_2\}$, or the intersection of some halfspaces, so is convex.\\
+    e) \ No. Counterexample: In $R^2$ , S = {(0,-2) , (0,2)} , T = {(0,0)}, then $\{x \mid \textbf{dist}(x, S) \leq \textbf{dist}(x, T)\} = \{x \leq -1 \cup x \geq 1\}$, and it is not convex.\\
+    f) \ Yes. $\left\{x \mid\|x-a\|_{2} \leq \theta\|x-b\|_{2}\right\} = \left\{x \mid\|x-a\|_{2}^2 \leq \theta^2\|x-b\|_{2}^2\right\} = \{x \mid x^Tx - 2a^Tx + a^Ta \leq \theta^2(x^Tx - 2b^Tx + b^Tb)\} = \{x \mid (1 - \theta^2)x^Tx - 2(a - \theta^2 b)^T x + (a^Ta - \theta^2 b^Tb) \leq 0\}$, and it is a ball.
+\end{solution}
+
+\paragraph{Problem 4: Examples}
+~\\
+
+\noindent
+Let~$C \subseteq \mathbb{R}^n$~be the solution set of a quadratic inequality,
+\begin{center}
+    $C = \{x \in \mathbb{R}^n|x^TAx + b^Tx + c \leqslant 0\}$
+\end{center}
+with~$A \in \mathbb{S}^n$, $b \in \mathbb{R}^n$, and~$c \in \mathbb{R}$.
+\begin{enumerate}[a)]
+    \item Show that~$C$~is convex if~$A \succeq 0$.
+
+    \item Is the following statement true? The intersection of~$C$~and the hyperplane defined by~$g^Tx+h=0$~is convex if~$A+\lambda gg^T \succeq 0$~for some~$\lambda \in \mathbb{R}$.
+\end{enumerate}
+\begin{solution}
+    a) We use the trick that the a set is convex if and only if its intersection with an arbitrary line $\{ x + tv \mid t\in R\}$ is convex. If we substitute the line equation in the quadratic formula we end up with:$\{x+tv \mid \alpha t^2+\beta t + \gamma \leq 0 \}$ with $\alpha = v^TAv , \beta = b^Tv + x^TAv + v^TAx\ and\ \gamma = c+b^Tx+x^TAx$. \\
+    If $A \succeq 0$, then $\alpha = v^TAv \geq 0$, then the solution to $\alpha t^2+\beta t + \gamma \leq 0$ is a bounded interval. Since the arbitrary value of $v$, each line intersecting with the set is convex, so the set is convex.\\
+    b) Let $B = A + \lambda g g^T \succeq 0$, then $x^TAx + b^Tx + c = x^T(B - \lambda gg^T)x + b^Tx + c = x^TAx - \lambda (g^Tx)^Tg^Tx + b^Tx + c = x^TAx + b^Tx + c - \lambda h^2$. Replace the $c$ in the question a) by $c - \lambda h^2$ and can get $B \succeq 0$.
+\end{solution}
+\paragraph{Problem 5: Dual cones}
+~\\
+
+\noindent
+Describe the dual cone for each of the following cones.
+\begin{enumerate}[a)]
+    \item $K=\{0\}$.
+    \item $K=\mathbf{R}^{2}$.
+    \item $K=\left\{\left(x_{1}, x_{2}\right)|| x_{1} \mid \leq x_{2}\right\}.$
+    \item $K=\left\{\left(x_{1}, x_{2}\right) \mid x_{1}+x_{2}=0\right\}.$
+\end{enumerate}
+\begin{solution}
+    a) $K^* = R^n$\\
+    b) $K^* = (R^2)^\perp$. If K is in $R^2$, then $K^* = \{0\}$\\
+    c) $K^* = K$\\
+    d) $K^* = 0$
+\end{solution}
+\end{document}
