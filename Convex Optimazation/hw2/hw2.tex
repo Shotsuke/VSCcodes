@@ -1,0 +1,271 @@
+
+\documentclass[a4paper]{article}
+% \usepackage[margin=1.25in]{geometry}
+\usepackage[inner=2.0cm,outer=2.0cm,top=2.5cm,bottom=2.5cm]{geometry}
+% \usepackage{ctex}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{braket}
+
+\newcommand{\homework}[5]{
+    \pagestyle{myheadings}
+    \thispagestyle{plain}
+    \newpage
+    \setcounter{page}{1}
+    \noindent
+    \begin{center}
+    \framebox{
+        \vbox{\vspace{2mm}
+        \hbox to 6.28in { {\bf Optimization Methods \hfill #2} }
+        \vspace{6mm}
+        \hbox to 6.28in { {\Large \hfill #1 \hfill} }
+        \vspace{6mm}
+        \hbox to 6.28in { {\it Instructor: {\rm #3} \hfill Name: {\rm #4}, StudentId: {\rm #5}}}
+        \vspace{2mm}}
+    }
+    \end{center}
+    % \markboth{#4 -- #1}{#4 -- #1}
+    \vspace*{4mm}
+}
+
+
+\newenvironment{solution}
+{\color{blue} \paragraph{Solution.}}
+{\newline \qed}
+
+\begin{document}
+%- Write your name and id here
+\homework{Homework 2}{Fall 2023}{Lijun Zhang}{Shuo Shen}{221502023}
+
+\paragraph{Notice}
+\begin{itemize}
+    \item The submission email is: \href{mailto:optfall2023@163.com}{optfall2023@163.com}.
+    \item Please use the provided \LaTeX{} file as a template.
+    \item If you are not familiar with \LaTeX{}, you can also use Word to generate a \textbf{PDF} file.
+\end{itemize}
+
+\paragraph{Problem 1: Convexity}
+~\\
+
+\begin{enumerate}[a)]
+    \item   Suppose $f:\mathbb{R} \rightarrow \mathbb{R}$ is convex and differentiable. Show that its running average $F$, i.e.,
+          \begin{equation*}
+              F(x) = \frac{1}{x} \int_{0}^x f(t) dt
+          \end{equation*}
+          is convex over $\textbf{dom}(F)=\mathbb{R}_{++}$.
+
+    \item Suppose $f$ and $g$ are both convex, nondecreasing (or nonincreasing), and positive real-valued functions defined on $\mathbb{R}$, prove that $fg$ is convex on $\textbf{dom}(f)\cap \textbf{dom}(g)$.
+
+    \item  Let~$f : \mathbb{R}^n \rightarrow \mathbb{R}$~be a function. Its perspective transform~$g : \mathbb{R}^{n+1} \rightarrow \mathbb{R}$~is defined by
+          \begin{equation}
+              g(x, t) = t f(\frac{x}{t}), \notag
+          \end{equation}
+          with domain~$\textbf{dom}(g) = \{(x, t) \in \mathbb{R}^{n+1} : x \in \textbf{dom}(f), t > 0\}$. Use the definition of convexity to prove that if~$f$~is convex, then so is its perspective transform~$g$.
+
+
+
+\end{enumerate}
+
+\begin{solution}
+
+\begin{enumerate}[a)]
+    \item   $$F^{'} (x) = -\frac{1}{x^2} \int_{0}^x f(t) dt + \frac{1}{x} f(x)$$
+            $$F^{''} (x) = \frac{2}{x^3}\int_{0}^x f(t) dt - \frac{2}{x^2} f(x) + \frac{1}{x} f^{'} (x)$$
+            $$= \frac{1}{x^3} \int _{0} ^x 2f(t) - 2 f(x) + x f^{'}(x) dt$$
+            $$= \frac{2}{x^3} \int _{0} ^{x} f(t) - f(x) + tf^{'} (x) dt$$
+            $$= \frac{2}{x^3} \int _{0} ^{x} f(t) - f(x) + (x - t) f^{'} (x) dt$$
+            Because f is convex, $f(t) - f(x) + (x - t) f^{'} (x) > 0$ holds, then $F^{''} > 0$ holds. So F is convex.
+
+    \item   
+            % Because f and g are all convex , we have $f(y) \geq f(x) + (y - x) f^{'}(x) , g(y) \geq g(x) + (y - x) g^{'}(x)$\\
+            % $$\therefore f(g(y)) \geq f( g(x) + (y-x) g^{'} (x) ) \geq f(g(x)) + (y-x)g^{'}(x) * f^{'}(g(x))$$
+            % So fg is convex.\\
+
+            $$f(\alpha x + (1 - \alpha) y ) \leq \alpha f(x) + (1 - \alpha) f(y)$$
+            $$g(\alpha x + (1 - \alpha) y ) \leq \alpha g(x) + (1 - \alpha) g(y)$$
+            Let $h(x) = f(x)g(x)$.
+            $$h(\alpha x + (1 - \alpha) y ) = f(\alpha x + (1 - \alpha) y )\ g(\alpha x + (1 - \alpha) y )$$
+            $$\leq (\alpha f(x) + (1 - \alpha) f(y))(\alpha g(x) + (1 - \alpha) g(y))$$
+            $$= \alpha^2 f(x)g(x) + \alpha (1 - \alpha)(f(x)g(y) + f(y)g(x)) + (1-\alpha)^2 f(y)g(y)$$\
+            \\
+            $$h(\alpha x + (1 - \alpha) y ) - \alpha h(x) - (1 - \alpha)h(y)$$
+            $$\leq \alpha (\alpha - 1) f(x)g(x) + \alpha (1 - \alpha)(f(x)g(y) + f(y)g(x)) + (1-\alpha)( - \alpha) f(y)g(y)$$
+            $$= \alpha (1 - \alpha)(-f(x)g(x) + f(x)g(y) + f(y)g(x) - f(y)g(y))$$
+            $$= \alpha (1 - \alpha)(f(y) - f(x))( - g(y) + g(x)) \leq 0$$
+            So $h(x)$ is convex.
+
+    \item  Mark $(x,t)$ as $x^{'}$.
+            $$g(\alpha x^{'} + (1 - \alpha) y^{'}) = (\alpha t_x + (1 - \alpha) t_y) f(\frac{\alpha x + (1 - \alpha) y}{\alpha t_x + (1 - \alpha) t_y})$$
+            $$= (\alpha t_x + (1 - \alpha) t_y) f(\frac{\alpha t_x \frac{x}{t_x} + (1 - \alpha) t_y \frac{y}{t_y}}{\alpha t_x + (1 - \alpha) t_y})$$
+            $$\leq \alpha t_x f(\frac{x}{t_x}) + (1 - \alpha) t_y f(\frac{y}{t_y}) = \alpha g(x^{'}) + (1 - \alpha) g(y^{'})$$
+            
+\end{enumerate}
+\
+\end{solution}
+
+
+\paragraph{Problem 2: Convex Functions}
+~\\
+
+\noindent
+\begin{enumerate}[a)]
+
+    \item Let $A$ is a positive semidefinite symmetric $n \times n$ matrix
+          and $\beta$ is a positive scalar. Prove that the function~$f:\mathbb{R}^n \mapsto \mathbb{R}$, defined as
+          \begin{equation}
+              f(x) =  e^{x^\top A x}, \notag
+          \end{equation}
+          is convex.
+
+    \item Show that the function
+          \begin{equation*}
+              f(x, u, v)=-\log \left(u v-x^{T} x\right)
+          \end{equation*}
+          is convex over $\textbf{dom} f=\left\{(x, u, v) \mid u v>x^{T} x, u, v>0\right\}$ (\textit{Hint: consider the function $f(x, u) = x^\top x / u$})
+
+    \item
+          Suppose $A\in\mathbb{R}^{n\times n}, b\in\mathbb{R}^{n}$. Show that the function
+          \begin{equation}
+              f(x)=\frac{\Vert Ax-b\Vert^2_2}{1-x^{\top}x} \notag
+          \end{equation}
+          is convex on $\textbf{dom}(f)=\{x\in\mathbb{R}^n|\Vert x\Vert_2\le 1\}$.
+
+\end{enumerate}
+
+
+\begin{solution}\begin{enumerate}[a)]
+
+    \item $$\nabla f(x) = (A + A^T) x e^{x^T A x} = 2A x e^{x^T A x}$$
+            $$\nabla ^2 f(x) = 2 A^T e^{x^T A x} + 2A x (A + A^T) e^{x^T A x}$$
+            $$= 2Ae^{x^T A x} + 4A^2 x e^{x^T A x} \succeq 0$$
+
+    \item $f(x,u,v) = - \log (uv - x^T x) = - \log ( u (\frac{v}{u} + \frac{x^T x}{u}))$,
+            so we define $g_1 (x,u,v) = u$ and $g_2 (x,u,v) = \frac{v}{u} + \frac{x^T x}{u}$, then
+            $f(x,u,v) = -\log (g_1(x,u,v) * g_2(x,u,v))$.\\
+            Both $g_1$ and $g_2$ are all concave, so $g_1 * g_2$ is concave. Since $h(z_1 , z_2) = -\log (z_1 z_2)$ is convex and none-increasing and $g_1 * g_2$ is concave, $f$ is convex.
+
+    \item
+          Consider the function quadratic-over-linear function $f(x,y) = \frac{x^2}{y}$, which is convex on its domain $x \in \mathbb{R}, y \in \mathbb{R_{++}}$.\\
+          Let $g(x) = \mid \mid Ax - b \mid \mid _2 ^2$ and $h(x) = 1 - x^T x$. When fix $y$ and focus on x, we see $f(x,y) = \frac{x^2}{y}$ is none-decreasing.Because $g(x)$ is convex, $f(g(x) , y)$ is convex.\\
+          Next we fix $g(x)$ and focus on y, now $f(g(x) , y)$ is none-increasing. Because $h(x)$ is concave, $f(g(x) , h(x))$ is convex. Summing up all above, we can draw that $f(x)$ is convex.
+
+\end{enumerate}
+\
+\end{solution}
+
+
+\paragraph{Problem 3: Concave Function}
+~\\
+
+Show that the function
+\begin{equation*}
+    f(x) = \left( \prod^n_{i=1} x_i \right)^{\frac{1}{n}}
+\end{equation*}
+with~$\textbf{dom}(f) = \mathbb{R}^n_{++}$~is concave.
+
+\begin{solution}
+$$Let\ g(x) = \prod^n_{i=1} x_i$$
+$$g(\alpha x + (1 - \alpha) y) = \prod _{i = 1} ^n (\alpha x_i + (1 - \alpha) y_i)$$
+$$\alpha g(x) + (1 - \alpha)g(y) =  \prod _{i=1}^n\alpha x_i + \prod_{i = 1}^n (1 - \alpha) y_i$$
+Due to $dom(f) = \mathbb{R} _{++} ^n$, $x_i , \alpha , 1 - \alpha , y_i$ are all positive, then it is obvious that $g(\alpha x + (1 - \alpha) y) \geq \alpha g(x) + (1 - \alpha)g(y)$, so $g$ is concave.\\
+Consider $f(x) = \left( x \right) ^{\frac{1}{n}}$, geometry-average function is concave and increasing. So $f(g(x))$ is concave.
+\end{solution}
+
+
+
+\paragraph{Problem 4: Conjugate Function}
+~\\
+
+\noindent
+\begin{enumerate}[a)]
+
+    \item Prove that the conjugate of the conjugate of a closed convex
+          function is itself, i.e., $f^{**} = f$, if $f$ is closed and convex.
+    \item Show that the conjugate of $f(x) = \max_{i=1, \cdots, n} x_i$ over $\mathbb{R}^n$.
+
+    \item Show that the conjugate of $f(x) = x^p$ over $\mathbb{R}_{++}$, where $p > 1$.
+\end{enumerate}
+
+\begin{solution}
+\begin{enumerate}[a)]
+
+    \item $f^*(y) = sup_{x \in dom\ f}(y^Tx - f(x))$\\
+            From Fenchel's inequality $x^Ty - f^*(y) \leq f(x)$, $f^{**}(x) = sup_{x \in dom\ f^*}(x^Ty - f^*(x)) \leq f(x)$.\\
+            Suppose $f^{**} \ne f$, then $\exists x, s.t.\ (x , f^{**}) \notin epi\ f$. So there is a strict separating hyperplane: $$
+            \begin{bmatrix} a \\ b \end{bmatrix} ^T
+            \begin{bmatrix} z - x \\ s - f^{**} (x)\end{bmatrix}
+            \leq c < 0, where\ (z,s) \in epi\ f.$$
+            If $b < 0$, then $$a^T(z - x) + b(s - f^{**} (x)) \leq c$$
+            $$\frac{a^T}{-b} (z - x) + f^{**} (x) - s \leq \frac{c}{-b}$$
+            $$l.h.s \leq \frac{a^T}{-b} (z - x) + f^{**} (x) - f(z)
+                    \leq f^* (\frac{a^T}{-b}) - \frac{a^T}{-b} x + f^{**}(x) < 0$$
+            This contradicts with Fenchel's inequality.
+            So $b = 0$.\\
+            Apply this to all $(x , f^{**}(x))$, then $epi\ f = epi\ f^{**}$, so $f = f^{**}$.
+            
+    \item $$f^* (y) = sup_{x \in dom\ f} \{ y^Tx - \max_{i=1, \cdots, n} x_i \}$$
+            If there exists $y_i$ belonging to $y$, and $y_i < 0$, then let $x_i \rightarrow -\infty$, there doesn't exists an upper bound. So $y \succeq 0$. For $y_i > 1$ letting $x_i \rightarrow +\infty$ makes similar condition. So $0 \leq y_i \leq 1\ \forall i$.\\
+            Let $x_1 \geq x_2 \geq \dots \geq x_n$, then
+            $$f^*(y) = sup_{x \in f} (\Sigma _{i = 1} ^n y_i x_i - x_1) = (y_1 - 1)x_1 + \Sigma_{i = 2}^n y_i x_i$$
+            To maximize it, we have $x_1 = \dots = x_n$, so $f^*(y) = sup_{x\in f}(x_1 (\Sigma_{i = 1} ^n y_i - 1))$\\
+            $= 0$, if $1^Ty = 1$ \\ $ = \infty$, O.W.
+
+    \item $$f^* (y) = sup_{x \in dom\ f} ( yx - x^P )$$
+            Let $g(x) = yx - x^p$, then $g^{'}(x) = y - px^{p - 1}$. Let $x_0$ satisfies $g^{'} (x_0) = y - px_0^{p - 1} = 0$.
+            $$f^{*}(y) = yx_0 - x_0^p = x_0(y - \frac{y}{p}) = (\frac{y}{p})^{1-p} y \frac{p - 1}{p}$$
+\end{enumerate}
+\
+\end{solution}
+
+
+
+\paragraph{Problem 5: Projection}
+~\\
+
+\noindent
+For any point~$y$, the projection onto a nonempty and closed convex set~$\mathcal{X}$~is defined as
+\begin{equation}
+    \Pi_{\mathcal{X}} (y) = \mathop{\arg\min}\limits_{x \in \mathcal{X}} \frac{1}{2} \Vert x - y \Vert^2_2. \notag
+\end{equation}
+
+\begin{enumerate}[a)]
+    \item Prove that~$\Vert \Pi_{\mathcal{X}} (x) - \Pi_{\mathcal{X}} (y) \Vert^2_2 \leqslant \Braket{\Pi_{\mathcal{X}} (x) - \Pi_{\mathcal{X}} (y), x - y}$.
+
+    \item Prove that~$\Vert \Pi_{\mathcal{X}} (x) - \Pi_{\mathcal{X}} (y) \Vert_2 \leqslant \Vert x - y \Vert_2$.
+
+    \item  Denote by $\Delta_{R} (x, y)$ the \textit{Bregman divergence} with respect to the function $R$, defined as
+          \begin{equation*}\label{bregman divergence}
+              \Delta_{R} (x, y) = R(x) - R(y) - \langle \nabla R(y), x - y \rangle, ~~\forall x, y \in \Omega.
+          \end{equation*}
+
+          If we choose $\Pi_{\mathcal{X}} (y) = \mathop{\arg\min}\limits_{x \in \mathcal{X}} \Delta_{R}(x,y) $, where $\mathcal{X}$ is the $n$-dimensional simplex $\{x\in\mathbb{R}^n_{+} \vert \sum_{i=1}^n x_i=1\}$,  and $R(x)=\sum_{i=1}^n x_i\log(x_i)$. Prove that $\Pi_{\mathcal{X}} (y)=\frac{y}{||y||_1}$ when $y\in\mathbb{R}^n_{++}$. (\textit{Hint: you may use the Jensen’s inequality})
+\end{enumerate}
+
+
+\begin{solution}
+\begin{enumerate}[a)]
+    \item Let $g(x) = \mid \mid x - y \mid \mid _2 ^2 = (x^T - y^T) (x - y) = x^Tx - y^Tx - x^Ty + y^Ty$\\
+    $g^{'}(x) = 2x - y - y$, so $x = y$ makes $g(x)$ fetch the min, if $y \in \mathcal{X}$, else $x - y$ is the distance between y and $\mathcal{X}$.\\
+    For the former case, $l.h.s = r.h.s = 0$\\
+    For the letter case, we have triangle inequality, $\Vert \Pi_{\mathcal{X}} (x) - \Pi_{\mathcal{X}} (y) \Vert \leq \Vert x - y \Vert$, then we can get $\Vert \Pi_{\mathcal{X}} (x) - \Pi_{\mathcal{X}} (y) \Vert^2_2 \leqslant \Braket{\Pi_{\mathcal{X}} (x) - \Pi_{\mathcal{X}} (y), x - y}$.
+    
+
+    \item When the equality holds, $x + \Pi_{\mathcal{X}}(x)$ and $y + \Pi_{\mathcal{X}}(y)$ refer to the same point. This inequality holds for the triangle inequality.
+
+    \item  
+\end{enumerate}
+\
+\end{solution}
+
+
+
+\end{document}
+
